@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "mongodb": "~1.4",
+	"monk": "https://github.com/vccabral/monk.git",
+	"socket.io": "*"
+	}
+}
