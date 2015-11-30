@@ -20,7 +20,7 @@
  	$scope.mediumid = [];
  	$scope.hardid = [];
 
- 	$http.get("http://localhost:3000/questions").then(function(res){
+ 	$http.get("/questions").then(function(res){
  		angular.forEach(res.data, function(value,key) {
  			level+= value.level+",";	
 

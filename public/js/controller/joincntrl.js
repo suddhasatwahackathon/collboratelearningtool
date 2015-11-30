@@ -10,7 +10,7 @@
 angular.module('collaborativeLearning')
   .controller('joinController', function ($rootScope,$scope,socket,$http,$state) {
   	
-  		$http.get("http://localhost:3000/rooms").then(function(res){
+  		$http.get("/rooms").then(function(res){
   			console.log("rooms length",res.data.length);
         var len = res.data.length;
         var id = res.data[len-1]._id;
