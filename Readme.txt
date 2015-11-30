@@ -37,4 +37,4 @@ localhost:3000/app/
 ### Todos
 
  - Client Validation
- - Score Graphs
+- Timer

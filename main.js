@@ -198,8 +198,6 @@ io.on('connection', function(socket){
             ques_arr.push(answer.questionid)
         })
 
-        console.log(ques_arr)
-
         var correct = {1:0,2:0,3:0}, wrong = {1:0,2:0,3:0}
         ques_arr = ques_arr.map(ObjectId);
         var question = db.get("question")
@@ -229,12 +227,11 @@ io.on('connection', function(socket){
                     // RESULTS
                     if("player_answer" in docs[0]){
                         other_stuff = docs[0].player_answer
-                        total_stuff = {"yours":other_stuff,"mine":stuff}
                         room.update({_id:roomid},{$set:{status:3}},function(e,d){
                             console.log("updated room status to 3(over): " + d)
                         })
-                        socket.emit("close", total_stuff)
-                        player.emit("close", total_stuff)
+                        socket.emit("close", {"yours":other_stuff,"mine":stuff})
+                        player.emit("close", {"yours":stuff,"mine":other_stuff})
                     }
                 } else {
                     socket.emit("message", "Player has left the room")
@@ -250,12 +247,11 @@ io.on('connection', function(socket){
                     // RESULTS
                     if("owner_answer" in docs[0]){
                         other_stuff = docs[0].owner_answer
-                        total_stuff = {"yours":other_stuff,"mine":stuff}
                         room.update({_id:roomid},{$set:{status:3}},function(e,d){
                             console.log("updated room status to 3(over): " + d)
                         })
-                        owner.emit("close", total_stuff)
-                        socket.emit("close", total_stuff)
+                        owner.emit("close", {"yours":stuff,"mine":stuff})
+                        socket.emit("close", {"yours":other_stuff,"mine":stuff})
                     }
                 } else {
                     socket.emit("message", "Player has left the room")
